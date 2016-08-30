@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Your To-Do List</title>
+
+  <link rel="stylesheet" href="css/jquery.mobile.min.css">
+  <link rel="stylesheet" href="css/index.css">
+ 
+  <script src="cordova.js"></script>
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery.mobile.min.js"></script>
+  <script src="js/index.js"></script>
+
+</head>
+
+<body>
+
+
+  <!-- ======================== HOMES CREEN ========================== -->
+  <div id="homeScreen" data-role="page">
+
+    <img src="img/to-do-banner.png" class="banner" />
+
+    <div data-role="content">
+
+        <ul data-role="listview" data-inset="true" class="ui-nodisc-icon ui-alt-icon">
+          <li><a href="#currentList">To-Do List</a></li>
+          <li><a href="#completedList">Completed To-Do list</a></li>
+          <li><a href="#addTask">Add Task to List</a></li>
+          <li><a href="#sendList">Send List</a></li>
+          <li><a href="#About">About</a></li>
+        </ul>
+
+    </div><!-- content -->
+
+  </div><!-- homescreen -->
+
+
+
+<!-- ======================== CURRENT TO-DO LIST ========================== -->
+
+  <div id="currentList" data-role="page">
+
+    <header data-role="header" data-position="fixed" data-id="appHeader">
+      <h1>Your To-Do-List</h1>
+      <a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+    </header><!-- header -->
+
+    <div data-role="content">
+
+      <h2 class="center">Current To-Do-List</h2>
+      <br><br>
+
+      <div id="retrieve-tasks">
+          <p class="list-empty center">There are no tasks in your To-Do list</p>
+      </div><!-- retrieve-items -->
+
+        <div id="retrieve-tasks">
+          <div data-role="main" class="ui-content">
+            <ul  data-role="listview" id="to-do-data-list" data-inset="true" class="ui-nodisc-icon ui-alt-icon">
+                <!-- list of current to-do list items will be displayed here -->
+            </ul>
+          </div>
+        </div>  
+    
+    </div><!-- content -->
+
+  </div><!-- currentList -->
+
+
+
+<!-- ======================== COMPLETED TO-DO LIST ========================== -->
+
+  <div id="completedList" data-role="page">
+
+    <header data-role="header" data-position="fixed" data-id="appHeader">
+      <h1>Your To-Do-List</h1>
+      <a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+    </header><!-- header -->
+
+    <div data-role="content">
+
+      <h2 class="center">Completed To-Do-List</h2>
+      <br><br>
+
+      <div id="retrieve-tasks">
+          <p class="list-empty center">There are no tasks in your To-Do list</p>
+      </div><!-- retrieve-items -->
+
+        <div id="retrieve-tasks">
+          <div data-role="main" class="ui-content">
+            <ul  data-role="listview" id="completed-Tasks" data-inset="true" class="ui-nodisc-icon ui-alt-icon">
+                <!-- list of completed to-do list items will be displayed here -->
+            </ul>
+          </div>
+        </div>  
+    
+    </div><!-- content -->
+
+  </div><!-- currentList -->
+
+
+
+<!-- ======================== ADD TASK TO LIST ========================== -->
+
+  <div id="addTask" data-role="page">
+
+    <header data-role="header" data-position="fixed" data-id="appHeader">
+      <h1>Your To-Do-List</h1>
+      <a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+    </header>
+
+    <div data-role="content">
+
+        <h2 class="center">Add Tasks to the To-Do List</h2>
+
+        <form name="addTaskForm">
+            <div data-role="main" class="ui-content">
+
+              <div data-role="fieldcontain">
+                  <label for="title">To-Do Item:</label>
+                  <input type="text" name="title" id="task" value="" data-mini="true" />
+              </div>
+
+              <div data-role="fieldcontain">
+                  <label for="textarea">Description for To-Do Task:</label>
+                  <textarea cols="40" rows="8" name="textarea" id="description" data-mini="true"></textarea>
+              </div>
+                          
+              <div data-role="fieldcontain">
+                  <label for="status">Task status:</label>
+                  <select name="status-slider" id="status" data-role="slider" data-mini="true">
+                      <option value="to-do">to-do</option>
+                      <option value="done">done</option>
+                  </select>
+              </div>
+
+              <!-- show current location in longitude and latitude -->
+              <div data-role="fieldcontain" id="location-data">
+                 <label for="location">Location:</label>
+                  <input type="button" onclick="showCurrentTaskPosition();" value="Get Location" />
+                  <ul id="location-list">
+                      
+                      <li>Latitude<input type="text" name="lat" id="theLatitude" value="" data-mini="true" /></li>
+                      <li>Longitude<input type="text" name="long" id="theLongitude" value="" data-mini="true" /></li>
+                      
+                  </ul>  
+              </div>
+
+              <!---  option to include a photo taken by user -->
+              <!-- Camera -->
+              <div data-role="fieldcontain" class="center"> 
+                  <h3 class>Camera:</h3>
+                  <b>Status:</b>    <span id="camera_status"></span><br>
+                  <br><b>Image:</b>
+                  <img class="task-image center" id="camera_image" src="" />
+              </div><!-- Camera -->
+              
+              <div> 
+                  
+                  <input type="button" onclick="takePicture();" value="Take Picture" />
+                  <input type="button" onclick="selectPicture();" value="Select Picture from Library" />
+
+                  <!-- enable Clear Picture button only after a user has selected an image -->
+                  <input type="button" onclick="clearPicture();" value="Clear Picture" id="clearButtonId"/>
+
+              </div>
+          
+
+          <div class="ui-body ui-body-b">
+                  <fieldset class="ui-grid-a">
+                          <div class="ui-block-a"><button type="submit" data-theme="d" data-mini="true">Cancel</button></div>
+                          <div class="ui-block-b"><button type="submit" data-theme="a" data-mini="true" onclick="addTask()">Add Task</button></div>
+                  </fieldset>
+          </div>
+
+        </div><!-- ui-content -->
+
+     </form><!-- form -->
+
+    </div><!-- content -->
+
+  </div><!-- addTask -->
+
+
+
+<!-- ======================== SENDLIST ========================== -->
+
+  <div id="sendList" data-role="page">
+    <header data-role="header" data-position="fixed" data-id="appHeader">
+      <h1>Send-List</h1>
+      <a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+    </header>
+   
+    
+    <div data-role="content">
+        <h2>Send your To-List</h2>
+        <p>Enter a valid email address and press the "Send List" button to email your to-do list to someone</p>
+
+        <div data-role="main" class="ui-content">
+
+            <form>
+
+              <div class="ui-field-contain">
+                <label for="email">Email Recipient:</label>
+                    <span><input type="emailAddress name="email" id="email" placeholder="email-reciever@to-do.com">
+                    <input data-inline="true" type="button" onclick="getEmailContact();" value="Contacts"></span>
+              </div>
+              <input data-inline="true" type="button" onclick="toDoListSender();" value="Send List">
+
+            </form>
+
+       </div><!-- main -->
+   
+
+    </div><!-- content -->  
+
+  </div><!-- sendList -->
+
+
+
+<!-- ======================== ABOUT SCREEN ========================== -->
+
+  <div id="aboutScreen" data-role="page">
+    <header data-role="header" data-position="fixed" data-id="appHeader">
+      <h1>SAMOCA</h1>
+      <a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+    </header>
+    <div data-role="content">
+     
+    </div>
+  </div><!-- aboutScreen -->
+
+
+  <!-- ======================== TASK DETAILS ========================== -->
+
+ <div id="taskDetails" data-role="page">
+
+    <header data-role="header" data-position="fixed" data-id="appHeader">
+      <h2>Task Details</h2>
+      <a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+    </header>
+
+    <div data-role="content">
+
+        <h3 class="center">Task Details</h3>
+
+        <form name="addTaskForm">
+            <div data-role="main" class="ui-content">
+
+              <!-- This input will remain hidden from user as it will store the Task id value for the task -->
+              <input type="text" name="id" id="taskDetails-id" value="" data-mini="true" />
+
+              <div data-role="fieldcontain">
+                  <label for="title">To-Do Item:</label>
+                  <input type="text" name="title" id="taskDetails-task" value="" data-mini="true" />
+              </div>
+
+              <div data-role="fieldcontain">
+                  <label for="textarea">Description for To-Do Task:</label>
+                  <textarea cols="40" rows="8" name="textarea" id="taskDetails-description" data-mini="true"></textarea>
+              </div>
+                          
+              <div data-role="fieldcontain">
+                  <label for="status">Task status:</label>
+                  <select name="status-slider" id="taskDetails-status" data-role="slider" data-mini="true">
+                      <option value="to-do">to-do</option>
+                      <option value="done">done</option>
+                  </select>
+              </div>
+
+              <!-- show current location in longitude and latitude -->
+              <div data-role="fieldcontain" id="location-data">
+                 <label for="location">Task Location:</label>
+                 <ul id="taskDetails-location-list">
+                      <li>Latitude<input type="text" name="lat" id="taskDetails-theLatitude" value="" data-mini="true" /></li>
+                      <li>Longitude<input type="text" name="long" id="taskDetails-theLongitude" value="" data-mini="true" /></li>
+                  </ul>  
+              </div>
+
+              <!---  option to include a photo taken by user -->
+              <!-- Camera -->
+              <div data-role="fieldcontain" class="center"> 
+                  <h3 class>Camera:</h3>
+                  <b>Status:</b>    <span id="camera_status"></span><br>
+                  <br><b>Image:</b>
+                  <img class="task-image center" id="taskDetails-camera_image" src="" />
+              </div><!-- Camera -->
+              
+              <div> 
+                  
+                  <input type="button" onclick="takePicture();" value="Take Picture" />
+                  <input type="button" onclick="selectPicture();" value="Select Picture from Library" />
+
+                  <!-- enable Clear Picture button only after a user has selected an image -->
+                  <input type="button" onclick="clearPicture();" value="Clear Picture" id="clearButtonId"/>
+
+              </div>
+          
+
+          <div class="ui-body ui-body-b">
+                  <fieldset class="ui-grid-a">
+                          <div class="ui-block-a"><button type="submit" data-theme="d" data-mini="true" onclick="deleteTask()">Delete Task</button></div>
+                          <div class="ui-block-b"><button type="submit" data-theme="a" data-mini="true" onclick="saveTask()">Save Task</button></div>
+                  </fieldset>
+          </div>
+
+        </div><!-- ui-content -->
+
+     </form><!-- form -->
+
+    </div><!-- content -->
+
+  </div><!-- Task Details -->
+
+</body>

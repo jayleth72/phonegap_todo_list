@@ -1,0 +1,64 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.jayleth.jays-to-do-list"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.jayleth.jays-to-do-list"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "com.jayleth.jays-to-do-list"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.jayleth.jays-to-do-list"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.jayleth.jays-to-do-list"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.jayleth.jays-to-do-list"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.jayleth.jays-to-do-list"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.jayleth.jays-to-do-list"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.jayleth.jays-to-do-list"
+        },
+        "phonegap-plugin-barcodescanner": {
+            "PACKAGE_NAME": "com.jayleth.jays-to-do-list"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.jayleth.jays-to-do-list"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.jayleth.jays-to-do-list"
+        },
+        "cordova-plugin-email-composer": {
+            "PACKAGE_NAME": "com.jayleth.jays-to-do-list"
+        },
+        "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "com.jayleth.jays-to-do-list"
+        },
+        "com-badrit-contactpicker": {
+            "PACKAGE_NAME": "com.jayleth.jays-to-do-list"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.jayleth.jays-to-do-list"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.jayleth.jays-to-do-list"
+        }
+    }
+}

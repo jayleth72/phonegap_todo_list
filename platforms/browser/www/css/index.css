@@ -1,0 +1,94 @@
+/* =======================
+
+Customer css for index.html
+
+========================== */
+
+/* === Global CSS=== */
+
+h1, h2, h3, h4, h5, h6 {
+    -webkit-font-smoothing: antialised;
+    text-rendering: optimizeLegibility;
+    font-weight: bold;
+}
+
+#homeBanner {
+      width: 100%;
+}
+
+.ui-page .ui-header {
+    background: #9A0100;
+    color: #fff;
+}
+
+.center {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+}
+    
+.banner {
+      display: block;
+      width: 100%;
+}
+    
+#qrcode {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+}
+    
+#map2 {
+      margin-left: auto;
+      margin-right: auto;
+      width: 320px;
+      height: 320px;
+}
+
+.event {
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    color: red;
+    font-size: 12px;
+    margin: 0px 30px;
+    padding: 2px 0px;
+}
+
+
+.event.listening {
+    background-color: #333333;
+    display: block;
+}
+
+.event.received {
+    background-color: #48946a;
+    display: none;
+}
+
+/* ====== Current List Page ========= */
+
+/* message shown when there are no items in the To-Do list */
+
+.list-empty {
+   display: none
+}
+
+/* ====== Add Task Page========= */
+
+.task-image {
+    width:120px;
+    visibility:hidden;
+    display:none;
+}
+
+#location-data ul {
+    list-style: none;
+    display: none;
+} 
+
+/* ====== Task Details Page========= */  
+
+#taskDetails-id {
+    display: none;
+}
+

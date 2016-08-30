@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Your To-Do List</title>
+
+  <link rel="stylesheet" href="css/jquery.mobile.min.css">
+  <link rel="stylesheet" href="css/index.css">
+ 
+  <script src="cordova.js"></script>
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery.mobile.min.js"></script>
+  <script src="js/index.js"></script>
+
+</head>
+
+<body>
+
+
+  <!-- ======================== HOMES SCREEN ========================== -->
+  <div id="homeScreen" data-role="page">
+
+    <img src="img/to-do-banner.png" class="banner" />
+
+    <div data-role="content">
+
+        <ul data-role="listview" data-inset="true" class="ui-nodisc-icon ui-alt-icon">
+          <li><a href="#currentList">To-Do List</a></li>
+          <li><a href="#completedList">Completed To-Do list</a></li>
+          <li><a href="#addTask">Add Task to List</a></li>
+          <li><a href="#sendList">Send List</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+
+    </div><!-- content -->
+
+  </div><!-- homescreen -->
+
+
+
+<!-- ======================== CURRENT TO-DO LIST ========================== -->
+
+  <div id="currentList" data-role="page">
+
+    <header data-role="header" data-position="fixed" data-id="appHeader">
+        <h1>Your To-Do-List</h1>
+        <a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+    </header><!-- header -->
+
+    <div data-role="content">
+
+      <h2 class="center">Current To-Do-List</h2>
+     
+      <div id="retrieve-tasks">
+          <h3 id="to-do-list-empty" class="center">There are no tasks in your To-Do list</h3>
+      </div><!-- retrieve-items -->
+      
+      <div id="addTaskButton" class="ui-body ui-body-b">
+          <a href="#addTask" data-role="button" data-theme="a" data-mini="true" >Add Task to this List</a>  
+      </div><!-- addTaskButton -->
+
+      <div id="retrieve-tasks">
+          <div data-role="main" class="ui-content">
+            <ul data-role="listview" id="to-do-data-list" data-inset="true" class="ui-nodisc-icon ui-alt-icon">
+               
+                <!-- list of current to-do list items will be displayed here -->
+            </ul>
+          </div>
+        </div><!-- retrieve-tasks -->  
+    
+        <div class="ui-body ui-body-b" id="to-do-list-buttons">
+                  <fieldset class="ui-grid-a">
+                          <div class="ui-block-a"><button type="submit" data-theme="d" data-mini="true" data-icon="delete" onclick="showConfirmDeleteToDoTasks() ; return false; ">Delete All</button></div>
+                          <a href="#sendList" data-role="button" data-theme="a" data-mini="true" onclick="setListTypeRadioButton('todo')" >Send List</a>
+                  </fieldset>
+        </div>
+
+    </div><!-- content -->
+
+  </div><!-- currentList -->
+
+
+
+<!-- ======================== COMPLETED TO-DO LIST ========================== -->
+
+  <div id="completedList" data-role="page">
+
+    <header data-role="header" data-position="fixed" data-id="appHeader">
+        <h1>Your To-Do-List</h1>
+        <a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+    </header><!-- header -->
+
+    <div data-role="content">
+
+      <h2 class="center">Completed Task List</h2>
+    
+      <div id="retrieve-tasks">
+          <h3 id="completed-list-empty" class="center">There are no tasks in your Completed Task list</h3>
+      </div><!-- retrieve-items -->
+
+        <div id="retrieve-tasks">
+          <div data-role="main" class="ui-content">
+            <ul  data-role="listview" id="completed-Tasks" data-inset="true" class="ui-nodisc-icon ui-alt-icon">
+                <!-- list of completed to-do list items will be displayed here -->
+            </ul>
+          </div>
+        </div>  
+    
+        <div class="ui-body ui-body-b" id="completed-list-buttons">
+                  <fieldset class="ui-grid-a">
+                          <div class="ui-block-a"><button type="submit" data-theme="d" data-mini="true" data-icon="delete" onclick="showConfirmDeleteCompletedTasks(); return false;">Delete All</button></div>
+                          <a href="#sendList" data-role="button" data-theme="a" data-mini="true" onclick="setListTypeRadioButton('completed')">Send List</a>
+                  </fieldset>
+        </div>
+
+    </div><!-- content -->
+
+  </div><!-- currentList -->
+
+
+
+<!-- ======================== ADD TASK TO LIST ========================== -->
+
+  <div id="addTask" data-role="page">
+
+    <header data-role="header" data-position="fixed" data-id="appHeader">
+      <h1>Your To-Do-List</h1>
+      <a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+    </header>
+
+    <div data-role="content">
+
+        <h2 class="center">Add Tasks to the To-Do List</h2>
+
+            <div data-role="main" class="ui-content">
+
+              <div data-role="fieldcontain">
+                  <label for="title">To-Do Item:</label>
+                  <input type="text" name="title" id="task" value="" data-mini="true" />
+              </div>
+
+              <div data-role="fieldcontain">
+                  <label for="textarea">Description for To-Do Task:</label>
+                  <textarea cols="40" rows="8" name="textarea" id="description" data-mini="true"></textarea>
+              </div>
+                          
+              <div data-role="fieldcontain">
+                  <label for="status">Task status:</label>
+                  <select name="status-slider" id="status" data-role="slider" data-mini="true">
+                      <option value="to-do">to-do</option>
+                      <option value="done">done</option>
+                  </select>
+              </div>
+
+              <!-- show current location in longitude and latitude -->
+              <div data-role="fieldcontain" id="location-data">
+                 <label for="location">Location:</label>
+                  <input type="button" onclick="showCurrentTaskPosition ()" value="Get Location" />
+                  <ul id="location-list">
+                      
+                      <li>Latitude<input type="text" readonly="readonly" disabled="disabled" name="lat" id="theLatitude" value="" data-mini="true" /></li>
+                      <li>Longitude<input type="text" readonly="readonly" disabled="disabled" name="long" id="theLongitude" value="" data-mini="true" /></li>
+                      
+                  </ul>  
+              </div>
+              
+              <!---  option to include a photo taken by user -->
+              <!-- Camera -->
+              <div data-role="fieldcontain" class="center"> 
+                  <h3 class>Camera:</h3>
+                  <b>Status:</b>    <span id="camera_status"></span><br>
+                  <br><b>Image:</b>
+                  <img class="task-image center" id="camera_image" src="" />
+              </div><!-- Camera -->
+              
+              <div> 
+                  
+                  <input type="button" onclick="takePicture();" value="Take Picture" />
+                  <input type="button" onclick="selectPicture();" value="Select Picture from Library" />
+
+                  <!-- enable Clear Picture button only after a user has selected an image -->
+                  <input type="button" onclick="clearPicture();" value="Clear Picture" id="clearButtonId"/>
+
+              </div>
+          
+
+          <div class="ui-body ui-body-b">
+                  <fieldset class="ui-grid-a">
+                          <div class="ui-block-a"><a href="#addTask" data-role="button" data-theme="d"  onclick="resetAddTaskForm ()">Reset/Clear</a></div>  
+                          <!-- <div class="ui-block-b"><a href="#homeScreen" data-role="button" data-theme="a"  onclick="addTask()">Add Task</a></div> --> 
+                          <div class="ui-block-b"><a href="#homeScreen" data-role="button" data-theme="a"  onclick="addingTaskToDatabase (); return true;">Add Task</a></div>  
+                  </fieldset>
+          </div>
+
+        </div><!-- ui-content -->
+
+    </div><!-- content -->
+
+  </div><!-- addTask -->
+
+
+
+<!-- ======================== SEND LIST ========================== -->
+
+  <div id="sendList" data-role="page">
+    <header data-role="header" data-position="fixed" data-id="appHeader">
+      <h1>Your To-Do-List</h1>
+      <a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+    </header>
+   
+    
+    <div data-role="content">
+
+        <h2 class="center">Send your To-List</h2>
+        <ol>
+            <li>Choose either a To-Do List or Completed Task List</li>
+            <li>Enter a valid email address or select one from your Contacts</li>
+            <li>Press the "Send List" button to email your to-do list to someone</li>
+        </ol>
+        
+        <div data-role="main" class="ui-content">
+
+            <form>
+
+                <fieldset data-role="controlgroup">
+                        <legend>List Type:</legend>
+                        <input type="radio" name="to-do-list-type" id="to-do-list-radio" value="on" checked="checked">
+                        <label for="to-do-list-radio">To-Do List</label>
+                        <input type="radio" name="to-do-list-type" id="completed-list-radio" value="off" >
+                        <label for="completed-list-radio">Completed List</label>
+                        
+                </fieldset>  
+
+                <div class="ui-field-contain">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" placeholder="email-reciever@to-do.com">
+                        <input data-inline="true" type="button" onclick="getEmailContact();" value="Contacts">
+                </div>
+
+                <div>
+                    <input type="button" onclick="toDoListSender()" value="Send List">
+                </div>   
+
+            </form>
+
+       </div><!-- main -->
+   
+
+    </div><!-- content -->  
+
+  </div><!-- sendList -->
+
+
+ <!-- ======================== TASK DETAILS ========================== -->
+
+ <div id="taskDetails" data-role="page">
+
+    <header data-role="header" data-position="fixed" data-id="appHeader">
+      <h1>Your To-Do-List</h1>
+      <a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+    </header>
+
+    <div data-role="content">
+
+        <h2 class="center">Task Details</h2>
+
+        <form name="addTaskForm">
+            <div data-role="main" class="ui-content">
+
+              <!-- This input will remain hidden from user as it will store the Task id value for the task -->
+              <input type="text" name="id" id="taskDetails-id" value="" data-mini="true" />
+
+              <div data-role="fieldcontain">
+                  <label for="title">To-Do Item:</label>
+                  <input type="text" name="title" id="taskDetails-task" value="" data-mini="true" />
+              </div>
+
+              <div data-role="fieldcontain">
+                  <label for="textarea">Description for To-Do Task:</label>
+                  <textarea cols="40" rows="8" name="textarea" id="taskDetails-description" data-mini="true"></textarea>
+              </div>
+                          
+              <div data-role="fieldcontain">
+                  <label for="status">Task status:</label>
+                  <select name="status-slider" id="taskDetails-status" data-role="slider" data-mini="true">
+                      <option value="to-do">to-do</option>
+                      <option value="done">done</option>
+                  </select>
+              </div>
+
+              <!-- show current location in longitude and latitude -->
+              <div data-role="fieldcontain" id="location-data">
+                 <label for="location">Task Location:</label>
+                 <ul id="taskDetails-location-list">
+                      <li>Latitude<input type="text" name="lat" readonly="readonly" disabled="disabled" id="taskDetails-theLatitude" value="" data-mini="true" /></li>
+                      <li>Longitude<input type="text" name="long" readonly="readonly" disabled="disabled" id="taskDetails-theLongitude" value="" data-mini="true" /></li>
+                  </ul>  
+              </div>
+
+              <!---  option to include a photo taken by user -->
+              <!-- Camera -->
+              <div data-role="fieldcontain" class="center"> 
+                  <h3 class>Camera:</h3>
+                  <b>Status:</b>    <span id="camera_status"></span><br>
+                  <br><b>Image:</b>
+                  <img class="task-image center" id="taskDetails-camera_image" src="" />
+              </div><!-- Camera -->
+              
+              <div> 
+                  
+                  <input type="button" onclick="takePicture();" value="Take Picture" />
+                  <input type="button" onclick="selectPicture();" value="Select Picture from Library" />
+
+                  <!-- enable Clear Picture button only after a user has selected an image -->
+                  <input type="button" onclick="clearPicture();" value="Clear Picture" id="clearButtonId"/>
+
+              </div>
+          
+
+          <div class="ui-body ui-body-b">
+                  <fieldset class="ui-grid-a">
+                          <div class="ui-block-a"><button data-theme="d" data-mini="true" data-icon="delete" onclick="showConfirmDelete(); return true;">Delete Task</button></div>
+                          <div class="ui-block-b"><button type="submit" data-theme="a" data-mini="true" onclick="saveTask()">Save Task</button></div>
+                  </fieldset>
+          </div>
+
+        </div><!-- ui-content -->
+
+     </form><!-- form -->
+
+    </div><!-- content -->
+
+  </div><!-- Task Details -->
+
+
+<!-- ======================== ABOUT SCREEN ========================== -->
+
+  <div id="about" data-role="page">
+    <header data-role="header" data-position="fixed" data-id="appHeader">
+      <h1>Your To-Do-List</h1>
+      <a href="#homeScreen" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-btn-left ui-nodisc-icon ui-alt-icon">Back</a>
+    </header>
+
+    <div data-role="content">
+      
+        <h2 class="center">About Your To-Do-List</h2>
+
+        <p>Your To-Do-List is an App that lets you compile a list of 'To-do' jobs or tasks on your phone.  For each task added to your 'To-Do'list, you can specify the following;<p>
+        <ul>
+            <li>A name for each task,</li> 
+            <li>A detailed description</li> 
+            <li>A 'to-do' or 'done' status,</li>
+            <li>Location with your task,</li>  
+            <li>Take a photo about your task.</li> 
+        </ul>
+        
+    <h3>Menu Options</h3>
+
+    <ol>
+      <li><b>To-Do-List</b> - incomplete tasks or tasks with a 'To-do' status</li>
+      <li><b>Completed To-Do-List</b> - complete tasks or tasks with a 'done' status</li>
+      <li><b>Add Task to List</b> - add task with specific details to the To-Do-List</li>
+      <li><b>Send List</b> - send a 'To-do' list to someone you know</li>
+    </ol>
+
+    </div><!-- content -->
+
+  </div><!-- aboutScreen -->
+
+</body>
